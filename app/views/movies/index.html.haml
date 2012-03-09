@@ -4,9 +4,9 @@
 %table#movies
   %thead
     %tr
-      %th#title_header= link_to "Movie Title", :sort => "title"
+      %th#title_header= link_to "Movie Title", :sort_by => "title"
       %th Rating
-      %th#release_date_header= link_to "Release Date", :sort => "release_date"
+      %th#release_date_header= link_to "Release Date", :sort_by => "release_date"
       %th More Info
   %tbody
     - @movies.each do |movie|
