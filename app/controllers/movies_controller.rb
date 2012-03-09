@@ -6,8 +6,12 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
+  def movie
+    @all_ratings = ['G','PG','PG-13','R']
+  end
   def index
-    @movies = Movie.order(params[:sort_by])
+    @movies = Movie.order(params[:sort_by]).find(:all, :conditions => {:rating => filter_rating})
+    movie
   end
 
   def new
@@ -42,5 +46,13 @@ class MoviesController < ApplicationController
 
   def sort_column
     Movie.column_names.include?(params[:sort_by]) ? params[:sort_by] : "title"
+  end
+  def filter_rating
+    if params[:ratings] == nil
+      keys = movie
+    else
+      ratings = params[:ratings]
+      keys = ratings.keys
+    end
   end
 end
